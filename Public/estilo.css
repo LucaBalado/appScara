@@ -1,0 +1,78 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-top: 30px;
+  color: #333;
+}
+
+.motor-control {
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  width: 200px;
+}
+
+h2 {
+  color: #333;
+}
+
+button {
+  font-size: 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin: 10px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 50px; /* Define un ancho fijo para los botones */
+  height: 50px; /* Define una altura fija */
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus {
+  outline: none;
+}
+
+.motor-control button {
+  display: inline-block;
+}
+
+.motor-control {
+  display: inline-block;
+  text-align: center;
+}
+
+.motor-control .left-right-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.motor-control .left-right-buttons button {
+  flex: 1; /* Para que los botones se distribuyan proporcionalmente */
+  width: 50%; /* Ajusta al 50% del contenedor */
+}
+
+button:focus {
+  outline: none;
+}
+
+h3 {
+  color: #777;
+  font-size: 16px;
+  margin-top: 0;
+}

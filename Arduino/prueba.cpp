@@ -3,7 +3,7 @@
 
 SoftwareSerial Bluetooth(10, 11); // RX, TX para Bluetooth
 
-// Definimos los pines para los motores
+// Pines de los motores
 const int motorPins[3][2] = {
   {3, 4},  // Motor 1: {Dirección, Step}
   {5, 6},  // Motor 2: {Dirección, Step}
@@ -14,8 +14,8 @@ const int motorPins[3][2] = {
 int motorSeleccionado = -1;
 
 void setup() {
-  Serial.begin(9600);       // Para monitorear en el Serial Monitor
-  Bluetooth.begin(9600);    // Inicializar comunicación Bluetooth
+  Serial.begin(9600);       
+  Bluetooth.begin(9600);   
 
   // Definir los pines de los motores como salidas
   for (int i = 0; i < 3; i++) {
@@ -32,10 +32,10 @@ void loop() {
     if (motorSeleccionado != -1) {
       switch (command) {
         case 'F':  // Comando para mover hacia adelante
-          moverMotor(true);  // Mover el motor seleccionado hacia adelante
+          moverMotor(true); 
           break;
         case 'B':  // Comando para mover hacia atrás
-          moverMotor(false); // Mover el motor seleccionado hacia atrás
+          moverMotor(false); 
           break;
         default:
           Serial.println("Comando no reconocido para movimiento");
@@ -45,15 +45,15 @@ void loop() {
       // Selección de motor
       switch (command) {
         case '1': 
-          motorSeleccionado = 0;  // Seleccionar motor 1
+          motorSeleccionado = 0;  
           Serial.println("Motor 1 seleccionado");
           break;
         case '2':
-          motorSeleccionado = 1;  // Seleccionar motor 2
+          motorSeleccionado = 1;  
           Serial.println("Motor 2 seleccionado");
           break;
         case '3':
-          motorSeleccionado = 2;  // Seleccionar motor 3
+          motorSeleccionado = 2;  
           Serial.println("Motor 3 seleccionado");
           break;
         default:
@@ -68,7 +68,7 @@ void loop() {
 void moverMotor(bool adelante) {
   if (motorSeleccionado < 0) {
     Serial.println("Ningún motor seleccionado");
-    return; // Salir de la función si no hay motor seleccionado
+    return;
   }
 
   int dirPin = motorPins[motorSeleccionado][0];  

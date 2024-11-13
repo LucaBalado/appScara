@@ -12,7 +12,7 @@ document.addEventListener("deviceready", () => {
 // Conectar al módulo Bluetooth (debes poner la dirección de tu módulo Bluetooth)
 function connectBluetooth() {
   bluetoothSerial.connect(
-      "direccion_del_modulo", // Aquí va la dirección del módulo Bluetooth, ej: "00:11:22:33:44:55"
+      "direccion_del_modulo", // Acá va la dirección del módulo Bluetooth, ej: "00:11:22:33:44:55"
       () => console.log("Conectado al módulo Bluetooth"),
       () => alert("No se pudo conectar al módulo Bluetooth")
   );
