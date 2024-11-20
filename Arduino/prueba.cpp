@@ -1,40 +1,38 @@
 #include Arduino.h
-#include SoftwareSerial.h
+#include <BluetoothSerial.h>  
 
-SoftwareSerial Bluetooth(10, 11); // RX, TX para Bluetooth
+BluetoothSerial SerialBT;  
 
-// Pines de los motores
 const int motorPins[3][2] = {
-  {3, 4},  // Motor 1: {Dirección, Step}
-  {5, 6},  // Motor 2: {Dirección, Step}
-  {7, 8}   // Motor 3: {Dirección, Step}
+  {3, 4},  // Dirección-Step del motor 1
+  {5, 6},  // Dirección-Step del motor 2
+  {7, 8}   // Dirección-Step del motor 3
 };
 
-
-int motorSeleccionado = -1;
+int motorSeleccionado = -1; 
 
 void setup() {
-  Serial.begin(9600);       
-  Bluetooth.begin(9600);   
+  Serial.begin(9600);        
+  SerialBT.begin("ESP32_SCARA");  
 
-  // Definir los pines de los motores como salidas
   for (int i = 0; i < 3; i++) {
-    pinMode(motorPins[i][0], OUTPUT); // Pin de dirección
-    pinMode(motorPins[i][1], OUTPUT); // Pin de paso
+    pinMode(motorPins[i][0], OUTPUT);
+    pinMode(motorPins[i][1], OUTPUT);
   }
+
+  Serial.println("ESP32 listo para conectar por Bluetooth...");
 }
 
 void loop() {
-  if (Bluetooth.available()) {
-    char command = Bluetooth.read();  // Leer el comando desde el Bluetooth
+  if (SerialBT.available()) { 
+    char command = SerialBT.read(); 
 
-    // Mover motor solo si se ha seleccionado uno
     if (motorSeleccionado != -1) {
       switch (command) {
-        case 'F':  // Comando para mover hacia adelante
-          moverMotor(true); 
+        case 'F': 
+          moverMotor(true);
           break;
-        case 'B':  // Comando para mover hacia atrás
+        case 'B':  
           moverMotor(false); 
           break;
         default:
@@ -42,7 +40,6 @@ void loop() {
           break;
       }
     } else {
-      // Selección de motor
       switch (command) {
         case '1': 
           motorSeleccionado = 0;  
@@ -64,28 +61,29 @@ void loop() {
   }
 }
 
-// Función para mover el motor seleccionado
 void moverMotor(bool adelante) {
   if (motorSeleccionado < 0) {
     Serial.println("Ningún motor seleccionado");
     return;
   }
 
-  int dirPin = motorPins[motorSeleccionado][0];  
-  int stepPin = motorPins[motorSeleccionado][1]; 
+  int dirPin = motorPins[motorSeleccionado][0];
+  int stepPin = motorPins[motorSeleccionado][1];
 
-  // Configurar la dirección
+  
   digitalWrite(dirPin, adelante ? HIGH : LOW); 
   
   Serial.print("Moviendo Motor ");
   Serial.print(motorSeleccionado + 1); 
   Serial.print(adelante ? " hacia adelante" : " hacia atrás");
   
-  // Hacer el número de pasos deseados
-  for (int i = 0; i < 200; i++) { // En este caso son 200 pasos
+ 
+  for (int i = 0; i < 200; i++) {
     digitalWrite(stepPin, HIGH);
     delayMicroseconds(1000);
     digitalWrite(stepPin, LOW);
     delayMicroseconds(1000);
   }
 }
+
+*/
